@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition    template="./resources/Template.xhtml">
+            <ui:define name="content">
+              
+                <h:form> 
+                    <h:commandLink class="bubble hMargin" value="Clear Cart" action="#{cartController.clear()}"  />
+                </h:form>
+                
+                <!-- need to know how to return to selected category -->
+                <!-- need to know how to return to selected category -->
+                <!-- need to know how to return to selected category -->
+                 
+                <h:link class="bubble hMargin" value="Continue Shopping" outcome="category" >
+                    <f:param name="category" value="#{categoryController.category.id}"/>
+                </h:link>
+                <h:form>
+                <h:commandLink class="bubble hMargin" value="Proceed to Checkout" action="#{loginController.checkout()}"/>
+                </h:form>
+                <h:dataTable var="item" id="table"
+                             value="#{cartController.cart.items}"
+                             styleClass="prog-table"
+                             headerClass="prog-table-header"
+                             rowClasses="prog-table-odd-row,prog-table-even-row">
+                    <h:column>
+
+                        <h:graphicImage  library="img/products" name="#{item.product.name}.png" width="120" height="100"
+                                         alt="#{item.product.name}"  /> 
+                    </h:column>
+                    <h:column>
+                    #{item.product.name}
+                    </h:column>
+                    <h:column>
+                    #{item.product.price} $
+                
+                    </h:column>
+                    <h:column>
+
+                        <h:form>
+                            <h:inputText id="quantUpdate" value="#{item.quantity}" />
+                            <h:commandButton value="Update" action="#{cartController.cart.update(item.product, item.quantity)}" />
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

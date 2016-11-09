@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <ui:composition template="./resources/Template.xhtml" >
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <p id="confirmationText">
+                    <strong>Your order has been successfully processed and will be delivered within 24 hours.</strong>
+                    <br/><br/>
+                    Please keep a note of your confirmation number:
+                    <strong>#{customerOrderController.orderId}</strong>
+                    <br/>
+                    If you have a query concerning your order, feel free to <a href="#">contact us</a>.
+                    <br/><br/>
+                    Thank you for shopping at the Affable Bean Green Grocer!
+                </p>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>

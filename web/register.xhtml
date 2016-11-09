@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="./resources/Template.xhtml" >
+            
+            <ui:define name="content">
+                <h:form>
+                    <table id="checkoutTable">
+                        <tr>
+                            <td><label for="name">Customer Name </label></td>
+                            <td class="inputField">
+                                <h:inputText 
+                                    size="31"
+                                    maxlength="45"
+                                    id="name"
+                                    required="true"
+                                    requiredMessage="You must enter a name"
+                                    validatorMessage="You must enter a name between 5 and 15 chars"
+                                    value="#{registerController.name}" >
+                                <f:validateLength minimum="5" maximum="15"/>
+                                <f:ajax event="blur" render="nameErrorMsg"/>
+
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="nameErrorMsg" showSummary="true" showDetail="false" for="name" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email</label></td>
+                            <td class="inputField">
+                                <h:inputText  
+                                    size="31"
+                                    maxlength="45"
+                                    id="email" 
+                                    required="true"
+                                    requiredMessage="You must enter your Email"
+                                    value="#{registerController.email}" >
+                                <f:ajax event="blur" render="emailErrorMsg"/>
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="emailErrorMsg" showSummary="true" showDetail="false" for="email" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="phone">Phone:</label></td>
+                            <td class="inputField">
+                                <h:inputText  
+                                    size="31"
+                                    maxlength="16"
+                                    id="phone" 
+                                    required="true"
+                                    requiredMessage="You must enter your phone number"
+                                    value="#{registerController.phone}" >
+                                <f:ajax event="blur" render="phoneErrorMsg"/>
+
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="phoneErrorMsg" showSummary="true" showDetail="false" for="phone" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="address">Address</label></td>
+                            <td class="inputField">
+                                <h:inputText  
+                                    size="31"
+                                    maxlength="45"
+                                    id="address" 
+                                    required="true"
+                                    requiredMessage="You must enter your address"
+                                    value="#{registerController.address}" >
+                                <f:ajax event="blur" render="addrErrorMsg"/>
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="addrErrorMsg" showSummary="true" showDetail="false" for="address" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="creditcard">Region</label></td>
+                            <td class="inputField">
+                                <h:inputText  
+                                    size="31"
+                                    maxlength="19"
+                                    id="cityRegion" 
+                                    required="true"
+                                    requiredMessage="You must enter your city region"
+                                    validatorMessage="You must enter a value less or equals 2 chars"
+                                    value="#{registerController.region}" >
+                                    <f:validateLength minimum="1" maximum="2"/>
+                                <f:ajax event="blur" render="regErrorMsg"/>
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="regErrorMsg" showSummary="true" showDetail="false" for="cityRegion" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="creditcard">Credit Card Number</label></td>
+                            <td class="inputField">
+                                <h:inputText  
+                                    size="31"
+                                    maxlength="19"
+                                    id="creditcard" 
+                                    required="true"
+                                    requiredMessage="You must enter your city Credit Card Number"
+                                    validatorMessage="You must enter a value less or equals 19 chars"
+                                    value="#{registerController.ccNumber}" >
+                                    <f:validateLength minimum="1" maximum="19"/>
+                                <f:ajax event="blur" render="cardErrorMsg"/>
+                                </h:inputText>
+                            </td>
+                            <td>
+                                <h:message id="cardErrorMsg" showSummary="true" showDetail="false" for="creditcard" class="error"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="password">Password</label></td>
+                            <td class="inputField">
+                                <h:inputSecret 
+                                    size="31"
+                                    maxlength="19"
+                                    id="password" 
+                                    value="#{registerController.password}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label for="confPassword">Confirm Password</label></td>
+                            <td class="inputField">
+                                <h:inputSecret 
+                                    size="31"
+                                    maxlength="19"
+                                    id="confPassword" 
+                                    value="#{registerController.confirm}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="inputField">
+                                <h:outputText 
+                                    class="error"
+                                    id="errMsg"
+                                    value="#{registerController.errorMsg}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h:commandButton  value="Submit Register" action="#{registerController.register()}"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>

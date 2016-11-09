@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="./resources/Template.xhtml" >
+
+            <ui:define name="content">
+                
+                <!-- Case -->
+		<div class="case">
+                    <h3>Categories</h3>
+			<!-- Row -->
+                        <div class="row" style="margin-bottom: 60px">
+                            <ul>
+                                <ui:repeat var="category" value="#{categoryController.categories}">
+                                    <li>
+					<h:link outcome="category"  class="product"   includeViewParams="true" >
+                                            <f:param name="category" value="#{category.id}"/>
+                                            
+                                            <h:graphicImage library="img/categories" name="#{category.name}.jpg" width="200" height="220"/>
+                                            <span class="order model">#{category.name}</span>
+                                            
+                                        </h:link>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                                <div class="cl">&nbsp;</div>
+                        </div>
+			<!-- End Row -->
+						
+		</div>
+		<!-- End Case -->
+                
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

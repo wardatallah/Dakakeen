@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:composition    template="./resources/Template.xhtml">
+
+        <ui:define name="content" >
+            
+            <div id="indexLeftColumn">
+
+                <p class="categoryText"> Categories</p>
+                <div id="navigation">
+                    <ul>
+                        <ui:repeat var="category" value="#{categoryController.categories}">
+                            <li>
+                            <h:link outcome="category"     includeViewParams="true" >
+                                <f:param name="category" value="#{category.id}"/>
+                                <span>#{category.name}</span>
+                            </h:link>
+                        </li>
+                            <br/>
+                        </ui:repeat>
+                    </ul>
+                </div>
+
+            </div>
+            <div>
+            <h:form>
+                <h:dataTable var="product" id="table"
+                             value="#{categoryController.selectedCategory.productCollection}"
+                             styleClass="prog-table"
+                             headerClass="prog-table-header"
+                             rowClasses="prog-table-odd-row,prog-table-even-row" >
+                    <f:facet name="caption"> #{categoryController.selectedCategory.name} products  </f:facet>
+                    <h:column>
+                        <f:facet name="header">Product Image</f:facet>
+                        <h:graphicImage  library="img/products" name="#{product.name}.png" width="100" height="85"
+                                         alt="#{product.name}"  /> 
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Product Name</f:facet>
+                        #{product.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Product Description</f:facet>
+                        #{product.description}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        #{product.price} $
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Purchase</f:facet>
+
+                        <h:commandButton value="Add to Cart" 
+                                         action="#{cartController.addToCart(product)}">
+                            <f:param name="category" value="#{categoryController.selectedCategory.id}"/>
+                      
+                        <f:setPropertyActionListener 
+                            target="#{categoryController.selected}" 
+                            value="#{categoryController.selectedCategory.id}" />
+                            
+                        </h:commandButton>
+                     </h:column>
+                </h:dataTable>
+
+            </h:form>
+            </div>
+            
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Update Category</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/resources/Template.xhtml" >
+
+            <ui:define name="content">
+                
+            <c:if test="#{loginController.adminLogin}">
+            <div id="indexLeftColumn" class="alignLeft">
+                <p class="categoryText">Admin Console</p>
+                    <h:form>
+                        <p><b>View</b></p>
+                        <p>
+                            <h:link outcome="listCust" value="List All Customers"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listOrds" value="List All Orders"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listMostPaid" value="Most Paid Products"/>
+                        </p>
+                        <p><b>Add</b></p>
+                        <p>
+                            <h:link outcome="addCat" value="Add Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="addPro" value="Add Product"/>
+                        </p>
+                        <p><b>Update</b></p>
+                        <p>
+                            <h:link outcome="updCat" value="Update Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="updPro" value="Update Product"/>
+                        </p>
+                        
+                    </h:form>
+                
+                <p>
+                    <h:form>
+                    <h:commandButton value="Logout" action="#{loginController.logout(null)}"></h:commandButton>
+                    </h:form>
+                </p>
+            </div>
+                 <div>
+            
+                   
+                <h:dataTable var="category" id="table"
+                             value="#{categoryController.categories}"
+                             styleClass="prog-table"
+                             headerClass="prog-table-header"
+                             rowClasses="prog-table-odd-row,prog-table-even-row" >
+                    
+                    <f:facet name="caption"> Categories  </f:facet>
+                     
+                    <h:column>
+                        <f:facet name="header">Category Image</f:facet>
+                        <h:form enctype="multipart/form-data">
+                        <h:graphicImage  library="img/categories" name="#{category.name}.jpg" id="img"
+                                         alt="#{category.name}" width="75px" height="50px" /> 
+                        <div style="float:right;">
+                        <h:inputFile id="file" value="#{categoryController.file}" />
+                        <h:commandButton value="Update">
+                            <f:ajax execute="file" listener="#{categoryController.updateFile(category)}" render="img" />
+                        </h:commandButton>
+                        </div>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Category Name</f:facet>
+                        <h:form>
+                            <h:outputText value="#{category.name}" id="name"/>
+                            <div style="float:right">
+                            <h:inputText value="#{categoryController.newCat}" id="nm" />
+                            <h:commandButton value="Update" >
+                                <f:ajax execute="nm" listener="#{categoryController.updateName(category)}" render="name" />
+                            </h:commandButton>
+                            </div>
+                         </h:form>
+                        
+                    </h:column>
+                        
+                    
+                </h:dataTable>
+                    
+            </div>
+            </c:if>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

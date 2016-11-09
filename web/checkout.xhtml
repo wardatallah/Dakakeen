@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <ui:composition template="./resources/Template.xhtml" >
+            <ui:define name="left">
+                left
+            </ui:define>
+            <ui:define name="content">
+                
+                <h:form>
+                    <table id="checkoutTable">
+                        <tr><td><label for="name">Customer Name </label></td>
+                            <td class="inputField"><h:outputText  id="name" value="#{loginController.customer.name}" /></td>
+                        </tr>
+                        <tr><td><label for="email">Email</label></td><td class="inputField"><h:outputText  id="email"  
+                                    value="#{loginController.customer.email}" /></td>
+                        </tr>
+                        <tr> <td><label for="phone">Phone:</label></td> <td class="inputField">
+                                <h:outputText  
+                                    id="phone" value="#{loginController.customer.phone}" /></td>
+                        </tr>
+                        <tr> <td><label for="address">Address</label></td> <td class="inputField">
+                                <h:outputText  
+                                    id="address" value="#{loginController.customer.address}" /></td>
+                        </tr>
+                        <tr><td><label for="creditcard">Region</label></td><td class="inputField">
+                                <h:outputText  
+                                    id="cityRegion" value="#{loginController.customer.cityRegion}" /></td>
+                        </tr>
+                        <tr><td><label for="creditcard">Credit Card Number</label></td><td class="inputField">
+                                <h:outputText  
+                                    id="ccNumber"
+                                    value="#{loginController.customer.ccNumber}" /></td>
+                        </tr>
+                        <tr><td colspan="2">
+                                <h:commandButton  value="submit purchase" 
+                        action="#{customerOrderController.placeOrder(loginController.customer, cartController.cart)}"/></td>
+                        </tr></table>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>

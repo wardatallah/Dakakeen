@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>All Customers</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/resources/Template.xhtml" >
+
+            <ui:define name="content">
+                
+            <c:if test="#{loginController.adminLogin}">
+            <div id="indexLeftColumn" class="alignLeft">
+                <p class="categoryText">Admin Console</p>
+                    <h:form>
+                        <p><b>View</b></p>
+                        <p>
+                            <h:link outcome="listCust" value="List All Customers"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listOrds" value="List All Orders"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listMostPaid" value="Most Paid Products"/>
+                        </p>
+                        <p><b>Add</b></p>
+                        <p>
+                            <h:link outcome="addCat" value="Add Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="addPro" value="Add Product"/>
+                        </p>
+                        <p><b>Update</b></p>
+                        <p>
+                            <h:link outcome="updCat" value="Update Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="updPro" value="Update Product"/>
+                        </p>
+                        
+                    </h:form>
+                
+                <p>
+                    <h:form>
+                    <h:commandButton value="Logout" action="#{loginController.logout(null)}"></h:commandButton>
+                    </h:form>
+                </p>
+            </div>
+            <table id="adminTable" class="detailsTable" >
+
+        <tr class="header">
+            <th colspan="4">customers</th>
+        </tr>
+
+        <tr class="tableHeading">
+            <td>customer id</td>
+            <td>name</td>
+            <td>email</td>
+            <td>phone</td>
+        </tr>
+
+                    
+                    <ui:repeat var="customer" value="#{customerController.customers}" varStatus="iter">
+                        
+                                         
+                            <tr class="#{((iter.index % 2) == 0) ? 'lightBlue' : 'white'} tableRow">
+                                    <td>#{customer.id}</td>
+                                    <td><h:link outcome="customer"   includeViewParams="true" >
+                            <f:param name="customer" value="#{customer.id}"/>#{customer.name}</h:link></td>
+                                    <td>#{customer.email}</td>
+                                    <td>#{customer.phone}</td>
+                             </tr>
+                           
+                    </ui:repeat>
+        
+
+            </table>    
+            </c:if>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Add New Product</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/resources/Template.xhtml" >
+
+            <ui:define name="content">
+                
+            <c:if test="#{loginController.adminLogin}">
+            <div id="indexLeftColumn" class="alignLeft">
+                <p class="categoryText">Admin Console</p>
+                    <h:form>
+                        <p><b>View</b></p>
+                        <p>
+                            <h:link outcome="listCust" value="List All Customers"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listOrds" value="List All Orders"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listMostPaid" value="Most Paid Products"/>
+                        </p>
+                        <p><b>Add</b></p>
+                        <p>
+                            <h:link outcome="addCat" value="Add Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="addPro" value="Add Product"/>
+                        </p>
+                        <p><b>Update</b></p>
+                        <p>
+                            <h:link outcome="updCat" value="Update Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="updPro" value="Update Product"/>
+                        </p>
+                        
+                    </h:form>
+                
+                <p>
+                    <h:form>
+                    <h:commandButton value="Logout" action="#{loginController.logout(null)}"></h:commandButton>
+                    </h:form>
+                </p>
+            </div>
+                <h:form id="form" enctype="multipart/form-data">
+                    
+                    <table id="checkoutTable">
+                        <tr>
+                            <td><h:outputLabel value="Category : " ></h:outputLabel></td>
+                            <td><h:selectOneMenu value="#{productController.categoryName}">
+                            <f:selectItems value="#{categoryController.categoryChoices}"/>
+                                </h:selectOneMenu></td>
+                        </tr>
+                   
+                    
+                        <tr>
+                            <td><h:outputLabel value="Product Name : " ></h:outputLabel></td>
+                            <td><h:inputText value="#{productController.name}"></h:inputText></td>
+                        </tr>
+                    
+                        <tr>
+                            <td><h:outputLabel value="Product Price : " ></h:outputLabel></td>
+                            <td><h:inputText value="#{productController.price}"></h:inputText></td>
+                        </tr>
+                    
+                        <tr>
+                            <td><h:outputLabel value="Product Description : " ></h:outputLabel></td>
+                            <td><h:inputTextarea rows="17" cols="100" value="#{productController.desc}"></h:inputTextarea></td>
+                        </tr>
+                    
+                        <tr>
+                            <td><h:outputLabel value="Product Image : " ></h:outputLabel></td>
+                            <td><h:inputFile id="file" value="#{productController.file}"/></td>
+                        </tr>
+                    
+                        <tr>
+                            <td></td>
+                            <td><h:commandButton value="Submit" action="#{productController.addProduct()}"></h:commandButton></td>
+                        </tr>
+                    </table>
+                </h:form>
+            </c:if>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

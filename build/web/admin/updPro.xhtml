@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Update Product</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/resources/Template.xhtml" >
+
+            <ui:define name="content">
+               
+            <c:if test="#{loginController.adminLogin}">
+            <div id="indexLeftColumn" class="alignLeft">
+                <p class="categoryText">Admin Console</p>
+                    <h:form>
+                        <p><b>View</b></p>
+                        <p>
+                            <h:link outcome="listCust" value="List All Customers"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listOrds" value="List All Orders"/>
+                        </p>
+                        <p>
+                            <h:link outcome="listMostPaid" value="Most Paid Products"/>
+                        </p>
+                        <p><b>Add</b></p>
+                        <p>
+                            <h:link outcome="addCat" value="Add Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="addPro" value="Add Product"/>
+                        </p>
+                        <p><b>Update</b></p>
+                        <p>
+                            <h:link outcome="updCat" value="Update Category"/>
+                        </p>
+                        <p>
+                            <h:link outcome="updPro" value="Update Product"/>
+                        </p>
+                        
+                    </h:form>
+                
+                <p>
+                    <h:form>
+                    <h:commandButton value="Logout" action="#{loginController.logout(null)}"></h:commandButton>
+                    </h:form>
+                </p>
+            </div>
+                <div>
+            
+                    <p>
+                        <div align="center"><b>Category</b>
+                            <h:form>
+                            <h:selectOneMenu value="#{categoryController.selected}">
+                            <f:selectItems value="#{categoryController.categoryChoices}"/>
+                            <f:ajax render="@all" execute="@all" />
+                        </h:selectOneMenu>
+                            </h:form>
+                        </div>
+                    </p>
+                    <h:dataTable var="product" id="table"
+                                 styleClass="prog-table"
+                             headerClass="prog-table-header"
+                             rowClasses="prog-table-odd-row,prog-table-even-row"
+                             value="#{categoryController.category.productCollection}">
+                    <f:facet name="caption"> #{categoryController.category.name} products  </f:facet>
+                    <h:column>
+                        <f:facet name="header">Image</f:facet>
+                        <h:form enctype="multipart/form-data">
+                        <h:graphicImage  library="img/products" name="#{product.name}.png" id="img"
+                                         alt="#{product.name}" width="75px" height="50px" /> 
+                        <div align="center">
+                            <h:inputFile id="file" value="#{productController.file}" />
+                            <h:commandButton value="Update" action="#{productController.updateFile(product)}" />
+                        </div>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:form>
+                            <h:outputText value="#{product.name}" id="namePro"/>
+                            <div align="center">
+                                <h:inputText value="#{productController.name}" id="nm" size="10"/>
+                            <h:commandButton value="Update" >
+                                <f:ajax execute="nm" listener="#{productController.updateName(product)}" render="namePro" />
+                            </h:commandButton>
+                            </div>
+                         </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                        <h:form>
+                            <h:outputText value="#{product.description}" id="descPro"/>
+                            <div align="center">
+                                <h:inputTextarea value="#{productController.desc}" id="nm" />
+                            <h:commandButton value="Update" >
+                                <f:ajax execute="nm" listener="#{productController.updateDesc(product)}" render="descPro" />
+                            </h:commandButton>
+                            </div>
+                         </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                        
+                        <h:form>
+                            <h:outputText value="#{product.price} $" id="price"/>
+                            <div align="center">
+                                <h:inputText value="#{productController.price}" id="pr" />
+                            <h:commandButton value="Update" >
+                                <f:ajax execute="pr" listener="#{productController.updatePrice(product)}" render="price" />
+                            </h:commandButton>
+                            </div>
+                         </h:form>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"></f:facet>
+                        
+                        <h:form>
+                            
+                            <h:commandButton value="Delete" action="#{productController.DeletePro(product)}">
+                            </h:commandButton>
+                         </h:form>
+                    </h:column>
+                    
+                </h:dataTable>
+
+                
+            </div>
+            </c:if>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

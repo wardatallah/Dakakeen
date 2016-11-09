@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <LINK REL="SHORTCUT ICON" HREF="/Dakakeen/resources/img/favicon.ico"/>
+        <h:outputStylesheet name="./css/style.css"/>
+        
+        <script src="../js/jquery-1.6.2.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-func.js" type="text/javascript"></script>
+        <script src="../js/jquery.jcarousel.min.js" type="text/javascript"></script>
+        <title>Organic Food E-Commerce</title>
+    </h:head>
+    <h:body>
+        <!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Header -->
+		<div id="top">
+			<!-- Shell -->
+			<div class="shell">
+				<div class="top-nav">
+					<ul>
+                                            
+                                            <li><h:form><h:commandLink action="#{loginController.login()}" rendered="#{!loginController.isLogin}">Login</h:commandLink><h:commandLink action="#{loginController.login()}" rendered="#{loginController.isLogin}">Panel</h:commandLink></h:form></li>
+                                            <h:form rendered="#{loginController.isLogin}" style="float: right"><li><h:commandLink action="#{loginController.logout(cartController.cart)}" rendered="#{loginController.isLogin}" >logout</h:commandLink></li></h:form>
+                                            <h:form rendered="#{!loginController.adminLogin}">
+                                                <li><h:commandLink action="#{loginController.checkout()}">Checkout</h:commandLink></li>
+                                                <li><h:commandLink action="#{cartController.viewCart()}">View Cart</h:commandLink></li>
+                                                <li class="nobg"><h5>Cart contains <h:outputText id="cartNumberofItems" value="#{cartController.cart.numberOfItems}" /> items</h5></li>
+                                            </h:form>
+                                           
+					</ul>
+                                    
+				</div>
+				<div class="cl">&nbsp;</div>
+			</div>
+			<!-- End Shell -->
+		</div>
+		<!-- End Top -->
+		<!-- Main -->
+		<div id="main">
+			<!-- Shell -->
+			<div class="shell">
+				<!-- Header -->
+				<div id="header">
+                                    <h1 id="logo"><h:form><h:link outcome="index" class="notext" /></h:form></h1>
+					
+					<div class="cl">&nbsp;</div>
+				</div>
+				<!-- End Header -->
+				<!-- Slider -->
+				
+				<!-- End Slider -->
+				<!-- Content -->
+                                
+				<div id="content">
+                                    <ui:insert name="content"></ui:insert>
+				</div>
+				<!-- End Content -->
+			</div>
+			<!-- End Shell -->
+		</div>
+		<!-- End Main -->
+		<div id="footer-push" class="cl">&nbsp;</div>
+	</div>
+	<!-- End Wrapper -->
+	<!-- Footer -->
+	<div id="footer">
+		<!-- Shell -->
+		<div class="shell">
+			<!-- Cols -->
+			
+			<!-- End Cols -->
+                        <p class="copy">&copy; Dakakeen.com. Design by <a href="http://www.facebook.com/ITnerShop" target="_blank">ITner</a></p>
+                        <a href="#" class="logo" title="Dakakeen"><img src="resources/css/images/footer1.png" alt="Shopper Friend" height="50px" /></a>
+			<div class="cl">&nbsp;</div>
+		</div>
+		<!-- End Shell -->
+	</div>
+	<!-- End Footer -->
+        
+    </h:body>
+
+</html>
